@@ -1,0 +1,1 @@
+kubectl create configmap special-config --from-literal repo_url=https://github.com/samjithin/terraform
