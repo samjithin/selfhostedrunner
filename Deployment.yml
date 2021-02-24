@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: runner
-          image: gcr.io/terraformlearning-284414/runner@sha256:c10dd0e290d1bc72b585f19dc81dcd88ad67c84dbbbc951f9da3bfd6badc288f
+          image: gcr.io/terraformlearning-284414/runner:latest
           env:
             - name: GITHUB_TOKEN
               valueFrom:
