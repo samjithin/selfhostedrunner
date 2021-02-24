@@ -21,7 +21,7 @@ env:
   GKE_CLUSTER: cluster-1   # TODO: update to cluster name
   GKE_ZONE: us-central1-c   # TODO: update to cluster zone
   DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  IMAGE: static-site
+  IMAGE: runner
 
 jobs:
   setup-build-publish-deploy:
@@ -54,9 +54,8 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" \
+          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+
           .
 
     # Push the Docker image to Google Container Registry
