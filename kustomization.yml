@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yml
+secretGenerator:
+- name: runner-k8s-secret
+  literals:
+  - gh_token=e34077b1404f38b01054c202a2a8e88bb148db05
+  - repo_owner=samjithin
+  - repo_name=terraform

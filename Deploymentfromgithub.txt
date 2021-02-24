@@ -29,39 +29,26 @@ spec:
     spec:
       containers:
         - name: runner
-          image: gcr.io/PROJECT_ID/runner:latest
+          image: gcr.io/terraformlearning-284414/runner@sha256:c10dd0e290d1bc72b585f19dc81dcd88ad67c84dbbbc951f9da3bfd6badc288f
           env:
-            - name: ACTIONS_RUNNER_INPUT_URL
-              valueFrom:
-                secretKeyRef:
-                  name: runner-k8s-config
-                  key: repo_url
             - name: GITHUB_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: runner-k8s-config
+                  name: runner-k8s-secret
                   key: gh_token
             - name: REPO_OWNER
               valueFrom:
                 secretKeyRef:
-                  name: runner-k8s-config
+                  name: runner-k8s-secret
                   key: repo_owner
             - name: REPO_NAME
               valueFrom:
                 secretKeyRef:
-                  name: runner-k8s-config
+                  name: runner-k8s-secret
                   key: repo_name
             - name: DOCKER_HOST
               value: tcp://localhost:2375
-          lifecycle:
-            preStop:
-              exec:
-                command:
-                  [
-                    "/bin/bash",
-                    "-c",
-                    './config.sh remove --token $(curl -sS --request POST --url "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runners/remove-token" --header "authorization: Bearer ${GITHUB_TOKEN}"  --header "content-type: application/json" | jq -r .token)',
-                  ]
+          
           resources:
             requests:
               memory: "256Mi"
