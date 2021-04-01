@@ -18,7 +18,7 @@
 # ACTIONS_RUNNER_INPUT_NAME is used by config.sh
 ACTIONS_RUNNER_INPUT_NAME=$HOSTNAME
 #get regsistration token for this runnner
-ACTIONS_RUNNER_INPUT_TOKEN="$(curl -sS --request POST --url "https://api.github.com/repos/samjithin/terraform/actions/runners/registration-token" --header "authorization: Bearer e34077b1404f38b01054c202a2a8e88bb148db05"  --header 'content-type: application/json' | jq -r .token)"
+ACTIONS_RUNNER_INPUT_TOKEN="$(curl -sS --request POST --url "https://api.github.com/repos/samjithin/terraform/actions/runners/registration-token" --header "authorization: Bearer *******"  --header 'content-type: application/json' | jq -r .token)"
 #configure runner
 /runner/config.sh --unattended --replace --work "/tmp" --url "https://github.com/samjithin/terraform" --token "$ACTIONS_RUNNER_INPUT_TOKEN"
 #start runner
